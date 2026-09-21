@@ -23,6 +23,7 @@ func (l *Log) Append(record Record) (uint64, error) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
 
+	record.Offset = uint64(len(l.records))
 	l.records = append(l.records, record)
 
 	return record.Offset, nil
